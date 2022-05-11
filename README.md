@@ -26,7 +26,7 @@ receives, and gets the repo’s full name, its primary language, its star count,
 then takes these values and puts it into a string separated by delimiters and ending with a newline 
 character. It encodes the data and sends it over to spark application.
 
-### Data Source Service
+### Spark Application
 The spark application, implemented in `spark_app.py`, gets a stream of data from the data source via 
 TCP connection. It performs the following:
 
@@ -50,7 +50,8 @@ dataframe in order to compute the following:
 9. Passes these statistics over to the webapp service.
 
 
-### 3. Web Application
-The web application visualizes the analysis results in real-time, which doesn't need to be fancy. A simple dashboard such as shown in the figure below would suffice. You can easily create a web application using web frameworks, such as [Flask](https://flask.palletsprojects.com/en/2.0.x/) and [Django](https://www.djangoproject.com/). Also, a simple [Flask-based dashboard](https://github.com/pacslab/big-data-systems-docker/blob/main/spark/app/nine-multiples/webapp/flask_app.py) is presented in Lab 7. You can modify its source code to implement the web application for this project.
+### Web Application
+The webapp service gets important repo data and stores it into a redis cache. When a user tries 
+to connect to localhost:5000, it gets the data and visualizes it. 
 
 <img src="Webapp.png" alt="Webapp Screenshot" width="500"/>
