@@ -28,17 +28,21 @@ character. It encodes the data and sends it over to spark application.
 
 ### Data Source Service
 The spark application, implemented in `spark_app.py`, gets a stream of data from the data source via 
-TCP connection. 
+TCP connection. It performs the following:
 
 1. Creates batches of 60 seconds, where the data is stored. socketTextStream 
 separates each element of data based on newline characters.
 2. Maps each repo splitting each string by the delimiter, such that each of the repos’ name, 
 language, stars, and description can be separately identified. 
-3. It then maps each repo into a key, value pair, where keys represent a tuple of the repo’s name, language, stars, description, and 
-value is 1. It then reduces by key based on if there are repeating repositories. After it is able to 
-perform map reduce on the repos, and update state by key, it then converts the RDD into a 
-dataframe to count repos, calculate average number of stars per language, etc. It passes these 
-statistics over to the webapp service.
+3. Maps each repo into a key, value pair, where keys represent a tuple of the repo’s name, language, stars, description, and 
+value is 1. 
+4. Reduces by key based on if there are repeating (non-unique) repositories. 
+5. Updates state by key
+6. After it is able to perform map reduce on the repos, and update state by key, it then converts the RDD into a 
+dataframe in order to compute the following:
+  1. count number of unique repos by language, calculate average number of stars per language, etc.
+  2. Hello
+7. It passes these statistics over to the webapp service.
 
 
 ### 3. Web Application
