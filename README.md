@@ -51,7 +51,6 @@ dataframe in order to compute the following:
 
 
 ### Web Application
-The webapp service gets important repo data and stores it into a redis cache. When a user tries 
-to connect to localhost:5000, it gets the data and visualizes it. 
+The webapp service gets the data from the Spark application, stores it into a redis cache, and constructs visualizations of the data. When a user connects to localhost:5000, It presents the visualizations. 
 
 <img src="Webapp.png" alt="Webapp Screenshot" width="500"/>
