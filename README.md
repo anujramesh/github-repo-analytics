@@ -1,4 +1,4 @@
-# Real-Time Streaming Analytics of GitHub Repos with Apache Spark, Docker, and Flask
+# Real-Time Streaming Analytics of GitHub Repositories with Apache Spark, Docker, and Flask
 
 ## Introduction
 This project performs real-time streaming analytics for public repositories hosted on GitHub. The system runs a stream processing pipeline, where the live data stream to be analyzed is coming from GitHub API. An Apache Spark cluster processes the data stream. A web application receives the output from Spark and visualizes the analysis result.
