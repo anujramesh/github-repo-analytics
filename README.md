@@ -44,8 +44,10 @@ dataframe in order to compute the following:
    2. Number of the collected repositories with changes pushed during the last 60 seconds. Each repository counts towards the result only once during a batch interval (60 seconds).
    3. Average number of stars of all the collected repositories since the start of the streaming application for each of the three programming languages. Each repository counts towards the result only once.
    4. Top 10 most frequent words in the description of all the collected repositories since the start of the streaming application for each of the three programming languages. Each repository counts towards the result only once.
+
 7. Prints the analysis results for each batch.
-8. Passes these statistics over to the webapp service.
+
+9. Passes these statistics over to the webapp service.
 
 
 ### 3. Web Application
