@@ -18,7 +18,26 @@ service through localhost:5000.
 
 ## Implementation
 
+### Data Source Service
+The data source service is implemented in `data_source.py`. This service listens 
+to port 9999, waiting for another service to connect. Once a connection has been established, it 
+makes a get request to the GitHub API every 15 seconds. It iterates through the JSON object it 
+receives, and gets the repo’s full name, its primary language, its star count, and its description. It 
+then takes these values and puts it into a string separated by delimiters and ending with a newline 
+character. It encodes the data and sends it over to spark application.
 
+### Data Source Service
+The spark application, implemented in `spark_app.py`, gets a stream of data from the data source via 
+TCP connection. It creates batches of 60 seconds, where the data is stored. socketTextStream 
+separates each element of data based on newline characters.
+
+It then maps each repo splitting each string by the delimiter, such that each of the repos’ name, 
+language, stars, and description can be separately identified. It then maps each repo into a key, 
+value pair, where keys represent a tuple of the repo’s name, language, stars, description, and 
+value is 1. It then reduces by key based on if there are repeating repositories. After it is able to 
+perform map reduce on the repos, and update state by key, it then converts the RDD into a 
+dataframe to count repos, calculate average number of stars per language, etc. It passes these 
+statistics over to the webapp service.
 
 
 ### 3. Web Application
